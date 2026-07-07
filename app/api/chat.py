@@ -8,6 +8,7 @@ from __future__ import annotations
 from fastapi import APIRouter
 from pydantic import BaseModel
 
+from app.config import settings
 from app.generation.generate import generate_answer
 from app.query.rewrite import rewrite_query
 from app.retrieval.hybrid import hybrid_search
@@ -43,11 +44,19 @@ def _title(text: str, limit: int = 60) -> str:
 @router.post("/api/chat", response_model=ChatResponse)
 async def chat(req: ChatRequest) -> ChatResponse:
     history = get_history(req.session_id)
-    query = rewrite_query(req.message, history)
 
-    candidates = hybrid_search(query)
-    top = rerank(query, candidates)
-    answer, citations = generate_answer(query, top, history)
+    if settings.crag_enabled:
+        # Corrective RAG: rewrite -> retrieve -> grade -> (correct) generate /
+        # (else) expand + retry -> verify. Rewrite happens inside the graph.
+        from app.crag.graph import run_crag
+
+        answer, citations = run_crag(req.message, history)
+    else:
+        # Linear fallback: rewrite -> hybrid retrieve -> rerank -> generate.
+        query = rewrite_query(req.message, history)
+        candidates = hybrid_search(query)
+        top = rerank(query, candidates)
+        answer, citations = generate_answer(query, top, history)
 
     # Persist both turns (title is only applied when the conversation is new).
     add_turn(req.session_id, "user", req.message, title=_title(req.message))

@@ -20,3 +20,6 @@ data/app.db*
 # os
 Thumbs.db
 .DS_Store
+
+CLAUDE.md
+SKILLS.md

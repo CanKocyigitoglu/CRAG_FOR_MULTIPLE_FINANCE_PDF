@@ -33,6 +33,14 @@ class Settings(BaseSettings):
     retrieve_top_k: int = 20
     final_top_k: int = 5
 
+    # corrective RAG (LangGraph layer between retrieval and generation)
+    crag_enabled: bool = True             # false -> linear retrieve->generate pipeline
+    crag_max_attempts: int = 2            # max query-correction rounds (loop guard)
+    crag_grade_top_k: int = 4             # how many reranked docs to grade (1 LLM call each)
+    crag_relevance_threshold: float = 0.7  # per-doc score >= this counts as relevant
+    crag_incorrect_max: float = 0.3       # best doc score <= this -> 'incorrect'
+    crag_web_search: bool = False         # off by default; finance data stays first-party
+
     # api
     cors_origins: str = "http://localhost:8000,http://127.0.0.1:5500,http://localhost:5500"
 

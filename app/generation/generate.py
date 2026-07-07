@@ -29,22 +29,27 @@ _SYSTEM = (
 )
 
 
-def chat(messages: list[dict]) -> str:
-    """Low-level chat completion. messages = [{'role','content'}, ...]."""
+def chat(messages: list[dict], fmt: dict | None = None, temperature: float = 0.1) -> str:
+    """Low-level chat completion. messages = [{'role','content'}, ...].
+
+    `fmt` is an optional JSON schema passed to Ollama's native structured-output
+    `format` field (used by the CRAG grader/verifier); when set, the returned
+    content is a JSON string conforming to that schema.
+    """
     if settings.llm_provider != "ollama":
         raise NotImplementedError(
             f"llm_provider '{settings.llm_provider}' not implemented; use 'ollama'"
         )
+    payload: dict = {
+        "model": settings.llm_model,
+        "messages": messages,
+        "stream": False,
+        "options": {"temperature": temperature},
+    }
+    if fmt is not None:
+        payload["format"] = fmt
     with httpx.Client(timeout=_TIMEOUT) as client:
-        resp = client.post(
-            f"{settings.ollama_url}/api/chat",
-            json={
-                "model": settings.llm_model,
-                "messages": messages,
-                "stream": False,
-                "options": {"temperature": 0.1},
-            },
-        )
+        resp = client.post(f"{settings.ollama_url}/api/chat", json=payload)
         if resp.status_code != 200:
             # Ollama puts the real cause (e.g. "llama runner process has
             # terminated" on out-of-memory) in the body; surface it instead of

@@ -53,6 +53,22 @@ guardrails, and observability**.
 (dense + BM25 + RRF + metadata filter) → rerank → context assembly (prompt + grounding +
 citations + access checks) → generate → output guardrails (citation/faithfulness check)`
 
+**Corrective RAG layer (`app/crag/`, LangGraph).** Between retrieval and generation sits a
+`StateGraph` that checks whether retrieved docs are actually useful before answering:
+`rewrite → retrieve (existing hybrid+rerank) → grade each doc (LLM) → correct? generate :
+expand query & re-search same corpus → generate (grounded) → verify (citations real +
+faithful) → retry within a bounded budget`. It **reuses** the existing rewrite/retrieval/
+generation modules as nodes (does not reimplement them) and is wired into `/api/chat` behind
+`CRAG_ENABLED` (default on; set false for the linear pipeline). Notes / deviations:
+- Grading uses **Ollama's native structured output** (`format`=JSON schema via the existing
+  `chat()`), not `langchain-ollama`, to avoid an extra LLM dependency.
+- **No web search by default.** Correction re-queries the local corpus only; `CRAG_WEB_SEARCH`
+  is off and intentionally unimplemented (finance figures stay first-party — wiring a provider
+  is a separate, approval-gated change).
+- Grading is 1 LLM call per doc over the top `CRAG_GRADE_TOP_K`; per-question LLM-call count is
+  logged. Loop is bounded by `CRAG_MAX_ATTEMPTS` (+ a `recursion_limit` backstop).
+- Pinned dependency: `langgraph==1.2.8` (pulls `langchain-core` et al.).
+
 **Cross-cutting:** evaluation harness, observability/tracing, semantic caching, async
 ingestion, security/access control, deployment.
 
@@ -145,6 +161,11 @@ finance-rag/
 │  ├─ generation/
 │  │  ├─ generate.py           # LLM call, prompt assembly, citation extraction
 │  │  └─ guardrails_out.py     # citation / faithfulness verification
+│  ├─ crag/                    # Corrective RAG layer (LangGraph StateGraph)
+│  │  ├─ graph.py              # nodes + edges + run_crag(); wraps existing modules
+│  │  ├─ grade.py              # per-doc relevance grading -> correct/ambiguous/incorrect
+│  │  ├─ expand.py             # query expansion (corpus re-search; web behind off flag)
+│  │  └─ verify.py             # citations-real + faithfulness check
 │  ├─ session/
 │  │  └─ store.py              # session_id -> conversation history
 │  ├─ cache/
@@ -154,7 +175,8 @@ finance-rag/
 ├─ scripts/
 │  └─ ingest_corpus.py         # BATCH pre-index the finance PDF corpus
 ├─ eval/
-│  ├─ golden_set.jsonl         # 50–200 Q&A pairs (curated)
+│  ├─ golden_set.jsonl         # curated Q&A (in-corpus + out-of-corpus negatives)
+│  ├─ compare_crag.py          # before/after: linear RAG vs CRAG on the golden set
 │  ├─ run_ragas.py
 │  └─ run_deepeval.py
 ├─ data/

@@ -22,5 +22,11 @@ rank-bm25==0.2.2
 httpx==0.28.1
 numpy==2.5.1
 
+# Corrective RAG orchestration (StateGraph). Verified on Python 3.13/Windows.
+# Pulls transitive deps: langchain-core, langgraph-checkpoint/prebuilt/sdk,
+# langsmith, xxhash, orjson. Structured grading uses Ollama's native `format`
+# (JSON schema), NOT langchain-ollama, to avoid an extra LLM dependency.
+langgraph==1.2.8
+
 # Tests
 pytest==8.3.4
