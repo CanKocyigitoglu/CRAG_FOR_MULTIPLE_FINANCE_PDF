@@ -1,0 +1,82 @@
+.upload-panel {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  text-align: center;
+  color: var(--mut);
+  font-size: 13px;
+  cursor: pointer;
+}
+.dropzone:hover {
+  border-color: var(--acc);
+  color: var(--fg);
+}
+.dz-plus {
+  font-size: 20px;
+  color: var(--acc);
+}
+.dz-hint {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.doc-empty {
+  color: var(--mut);
+  font-size: 12px;
+  padding: 4px 2px;
+}
+.doc-row {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.doc-name {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.doc-status {
+  font-size: 11px;
+  padding: 1px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.doc-status.indexing {
+  background: #2a2410;
+  color: var(--amber);
+}
+.doc-status.ready {
+  background: #0f2a1e;
+  color: var(--green);
+}
+.doc-status.error {
+  background: #2a1414;
+  color: var(--red);
+}

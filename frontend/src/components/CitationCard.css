@@ -1,0 +1,29 @@
+.citation {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--acc);
+  border-radius: 6px;
+  padding: 8px 11px;
+}
+.citation-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.citation-n {
+  font-family: var(--mono);
+  color: var(--acc);
+  font-weight: 700;
+}
+.citation-doc {
+  font-weight: 600;
+}
+.citation-match {
+  margin-left: auto;
+}
+.citation-snippet {
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--mut);
+}

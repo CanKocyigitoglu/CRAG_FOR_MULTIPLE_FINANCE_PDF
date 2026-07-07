@@ -1,0 +1,88 @@
+.conv-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.conv-new {
+  background: var(--acc);
+  color: #06101f;
+  border: none;
+  border-radius: var(--radius);
+  padding: 9px 12px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.conv-search {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+.conv-search:focus {
+  outline: none;
+  border-color: var(--acc);
+}
+
+.conv-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.conv-empty {
+  color: var(--mut);
+  font-size: 12px;
+  padding: 6px 4px;
+}
+
+.conv-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.conv-row:hover {
+  background: var(--panel-2);
+}
+.conv-row.active {
+  background: var(--panel-2);
+  border-color: var(--acc-dim);
+}
+.conv-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.conv-del {
+  background: none;
+  border: none;
+  color: var(--mut);
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 2px;
+  opacity: 0;
+}
+.conv-row:hover .conv-del {
+  opacity: 1;
+}
+.conv-del:hover {
+  color: var(--red);
+}

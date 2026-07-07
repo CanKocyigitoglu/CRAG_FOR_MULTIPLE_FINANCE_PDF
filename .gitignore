@@ -1,0 +1,22 @@
+# secrets / config
+.env
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# frontend (React/Vite)
+frontend/node_modules/
+frontend/dist/
+
+# data — never commit the finance PDFs, the index, or chat history
+data/raw/
+data/processed/
+data/qdrant/
+data/app.db*
+
+# os
+Thumbs.db
+.DS_Store

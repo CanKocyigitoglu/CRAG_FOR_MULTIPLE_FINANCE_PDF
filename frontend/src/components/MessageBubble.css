@@ -1,0 +1,38 @@
+.bubble {
+  max-width: 760px;
+  line-height: 1.55;
+}
+.bubble.user {
+  align-self: flex-end;
+  background: #1d2430;
+  padding: 10px 14px;
+  border-radius: 12px 12px 2px 12px;
+  white-space: pre-wrap;
+}
+.bubble.bot {
+  align-self: flex-start;
+}
+.answer {
+  white-space: pre-wrap;
+}
+.answer.error {
+  color: var(--red);
+}
+.typing {
+  color: var(--mut);
+  font-style: italic;
+}
+
+.citations {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.citations-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mut);
+  margin-bottom: 2px;
+}

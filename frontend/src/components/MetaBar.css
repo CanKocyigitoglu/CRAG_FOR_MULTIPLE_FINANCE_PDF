@@ -1,0 +1,28 @@
+.metabar {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.stat {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 12px;
+  min-width: 84px;
+}
+.stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mut);
+}
+.stat-value {
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--mono);
+  margin-top: 1px;
+}
+.stat-value.accent {
+  color: var(--acc);
+}

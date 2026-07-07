@@ -1,0 +1,59 @@
+.doclist {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+}
+.doclist-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mut);
+  margin-bottom: 4px;
+}
+.doc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 10px;
+  color: var(--fg);
+  text-align: left;
+  width: 100%;
+}
+.doc-item:hover {
+  border-color: var(--acc);
+}
+.doc-item.active {
+  border-color: var(--acc);
+  background: var(--acc-dim);
+}
+.doc-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.doc-item-name {
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.doc-item-id {
+  font-size: 10px;
+  color: var(--mut);
+}
+.doclist-empty {
+  color: var(--mut);
+  font-size: 12px;
+  padding: 4px 2px;
+}

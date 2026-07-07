@@ -1,0 +1,7 @@
+# OPTIONAL — cross-encoder reranking (Milestone 1 "rerank" step).
+# Heavy: pulls torch + transformers (~hundreds of MB). Install with:
+#   .venv/Scripts/pip install -r requirements-rerank.txt
+# If not installed, the app still runs and falls back to RRF-only ordering
+# (see app/retrieval/rerank.py — it degrades gracefully).
+
+sentence-transformers>=3.0.0

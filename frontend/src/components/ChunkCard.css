@@ -1,0 +1,97 @@
+.chunk-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chunk-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.chunk-source {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.chunk-doc {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chunk-id {
+  font-size: 10px;
+  color: var(--mut);
+}
+.chunk-page {
+  flex-shrink: 0;
+}
+
+.chunk-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.chunk-tag {
+  font-size: 10px;
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
+.chunk-tag.child {
+  color: var(--green);
+}
+.chunk-tag.parent {
+  color: var(--violet);
+}
+.chunk-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  color: var(--fg);
+}
+.chunk-text.parent {
+  color: var(--mut);
+  border-left: 2px solid var(--violet);
+  padding-left: 10px;
+}
+.chunk-text mark {
+  background: #4a3a00;
+  color: #ffe082;
+  border-radius: 3px;
+  padding: 0 1px;
+}
+
+.chunk-parent-note {
+  font-size: 11px;
+  color: var(--mut);
+  font-style: italic;
+}
+.chunk-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 100%;
+}
+.chunk-caret {
+  font-size: 11px;
+  color: var(--mut);
+}
+
+.chunk-foot {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}

@@ -1,0 +1,11 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-body {
+  flex: 1;
+  min-height: 0; /* let children scroll instead of the page */
+  display: flex;
+}

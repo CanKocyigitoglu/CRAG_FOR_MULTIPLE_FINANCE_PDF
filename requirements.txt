@@ -1,0 +1,26 @@
+# Core RAG stack — Docker-free local dev (Milestone 1).
+# Pinned to versions verified working on Python 3.13 / Windows.
+# Reranker deps are optional and live in requirements-rerank.txt (heavy: torch).
+
+fastapi==0.139.0
+uvicorn[standard]==0.50.0
+python-multipart==0.0.32
+pydantic==2.13.4
+pydantic-settings==2.14.2
+
+# Vector store — embedded on-disk mode, no Docker/server needed.
+qdrant-client==1.18.0
+
+# PDF parsing (finance = tables). PyMuPDF for text/layout, pdfplumber for tables.
+pymupdf==1.28.0
+pdfplumber==0.11.10
+
+# Sparse keyword retrieval (BM25), fused with dense via RRF.
+rank-bm25==0.2.2
+
+# Ollama HTTP client (embeddings + generation) and math.
+httpx==0.28.1
+numpy==2.5.1
+
+# Tests
+pytest==8.3.4

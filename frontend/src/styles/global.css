@@ -1,0 +1,74 @@
+:root {
+  --bg: #0f1216;
+  --panel: #171b21;
+  --panel-2: #12161c;
+  --line: #262c35;
+  --fg: #e6e9ee;
+  --mut: #8b95a3;
+  --acc: #4a9eff;
+  --acc-dim: #1d3a5f;
+  --green: #3ecf8e;
+  --amber: #e8c14a;
+  --red: #ff6b6b;
+  --violet: #9d7bff;
+  --radius: 10px;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2c333d;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* shared atoms */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  color: var(--mut);
+}
+.badge.accent {
+  background: var(--acc-dim);
+  border-color: transparent;
+  color: #cfe4ff;
+}
+.mono {
+  font-family: var(--mono);
+}
